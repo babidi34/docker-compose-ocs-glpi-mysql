@@ -1,0 +1,78 @@
+ 
+version: '3'
+
+services:
+  ocsapplication:
+    image: ocsinventory/ocsinventory-docker-image:2.6
+    container_name : ocsinventory-server
+    restart: always
+    ports:
+      - 90:80
+      - 443:443
+    volumes:
+      - "perlcomdata:/etc/ocsinventory-server"
+      - "extensionsdata:/usr/share/ocsinventory-reports/ocsreports/extensions"
+      - "varlibdata:/var/lib/ocsinventory-reports"
+      - "httpdconfdata:/etc/httpd/conf.d"
+    environment:
+      OCS_DB_SERVER: mysql
+      OCS_DB_USER: ocsuser
+      OCS_DB_PASS: ocspass
+      OCS_DB_NAME: ocsweb
+    links:
+      - mysql
+    networks:
+            glpi_project:
+    depends_on:
+      - mysql    
+
+  mysql :
+    image : mysql:5.7
+    container_name : mysql
+    hostname: mysql
+    restart: always
+    ports :
+      - 3306:3306
+    volumes :
+      - ./sql/:/docker-entrypoint-initdb.d/
+      - "/var/lib/mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD : rootpass
+      MYSQL_USER : ocsuser
+      MYSQL_PASSWORD : ocspass
+      MYSQL_DATABASE : ocsweb
+    entrypoint:
+      sh -c "
+        echo 'CREATE DATABASE IF NOT EXISTS glpidb; CREATE USER glpi_user@localhost; GRANT ALL PRIVILEGES ON glpidb.* TO glpi_user@% IDENTIFIED BY glpi; FLUSH PRIVILEGES;' > /docker-entrypoint-initdb.d/init.glpidb.sql;
+        /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
+#    command: bash -c "mysql -u root -prootpass  mysql < /docker-entrypoint-initdb.d/init.db1.sql"
+    networks:
+            glpi_project:
+  glpi:
+    image: diouxx/glpi
+    container_name : glpi
+    hostname: glpi
+    ports:
+      - "80:80"
+    networks:
+            glpi_project:
+    links :
+      - mysql
+    depends_on:
+      - mysql
+    environment:
+      - TIMEZONE=Europe/Brussels
+    volumes:
+      - "/var/www/html/glpi/:/var/www/html/glpi"
+    restart: always
+ 
+networks:
+  glpi_project:
+
+volumes:
+  perlcomdata:
+  extensionsdata:
+  varlibdata:
+  httpdconfdata:
+  sqldata:
