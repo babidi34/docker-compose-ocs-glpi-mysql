@@ -17,7 +17,7 @@ Remarque : URL pour OCS :  http://localhost:90/ocsreports
 
 Connexion base de données GLPI :
 
-*Serveur base de données : mysql
+Serveur base de données : mysql
 Nom d'utilisateur : glpi_user
 mot de passe : glpi
 
