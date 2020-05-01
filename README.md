@@ -12,10 +12,10 @@ Docker compose OCS/GLPI + mysql avec 2 base de données dans le même conteneur 
 **GLPI est mappé sur le port 80 du localhost, OCS sur le port 90 du localhost et mysql 3306 du localhost.**
 
 
-Remarque : URL pour OCS :  http://localhost:90/ocsreports
+**Remarque : URL pour OCS :  http://localhost:90/ocsreports**
 
 
-Connexion base de données GLPI :
+*Connexion base de données GLPI :
 
 Serveur base de données : mysql
 Nom d'utilisateur : glpi_user
@@ -27,3 +27,4 @@ base de données : glpidb
 login/mdp glpi : glpi/glpi
 
 login/mdp ocs : admin/admin*
+
