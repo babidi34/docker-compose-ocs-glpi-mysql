@@ -1,4 +1,0 @@
-FROM mysql:8-debian
-
-ENV MYSQL_RANDOM_ROOT_PASSWORD=true
-COPY sql/initdb.sql /docker-entrypoint-initdb.d/
