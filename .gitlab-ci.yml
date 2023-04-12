@@ -1,0 +1,11 @@
+image: debian:latest
+
+stages:
+
+  - test_docker_compose
+
+test_docker_compose:
+  stage: test_docker_compose
+  script: bash setup.sh
+  only:
+    - master
