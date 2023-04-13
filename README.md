@@ -67,6 +67,20 @@ To stop and remove the containers, use the following Docker Compose command:
     docker-compose down -v
 ```
 
+## Data Volumes
+
+In the `docker-compose.yml` file, we have defined several data volumes for the MySQL, GLPI, and OCS services. These volumes are essential for persisting data across container restarts and ensuring that your data is not lost when updating or removing containers. Below is a brief explanation of the purpose of each volume:
+
+- `sqldata`: This volume stores MySQL database files, ensuring that your database data is preserved across container restarts and updates.
+- `glpidata`: This volume stores GLPI files, including uploaded documents and configuration settings, allowing you to maintain your GLPI instance's state even when the container is updated or restarted.
+- `perlcomdata`: This volume stores OCS Inventory Server configuration files, which are essential for preserving custom configuration settings across container restarts and updates.
+- `extensionsdata`: This volume stores OCS Inventory Reports extensions, allowing you to maintain custom extensions when updating or restarting the container.
+- `varlibdata`: This volume stores OCS Inventory Reports data files, ensuring that your OCS reports are preserved across container restarts and updates.
+- `httpdconfdata`: This volume stores Apache HTTPD configuration files for the OCS Inventory Server, allowing you to maintain your custom configuration settings when updating or restarting the container.
+
+Using these data volumes ensures that your services' data and configuration settings are preserved across container restarts and updates, providing a more robust and reliable deployment.
+
+
 ## License
 
 This project is provided under the MIT License.
