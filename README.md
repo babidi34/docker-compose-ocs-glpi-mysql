@@ -26,8 +26,8 @@ The script will replace the placeholders in the sql/initdb.sql.template file wit
 ## Accessing the Services
 
 Once the containers are up and running, you can access the GLPI and OCS Inventory web interfaces using the following URLs:
-- GLPI: https://localhost
-- OCS Inventory: https://localhost:8443
+- GLPI: https://localhost/glpi
+- OCS Inventory: https://localhost:8443/ocsreports
 
 The default credentials for GLPI and OCS Inventory are:
 

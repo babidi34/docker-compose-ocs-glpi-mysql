@@ -1,4 +1,4 @@
-image: debian:latest
+image: babidi34/debian-docker:debian-11
 
 stages:
 
