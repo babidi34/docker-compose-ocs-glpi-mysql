@@ -1,7 +1,9 @@
 image: babidi34/debian-docker:debian-11
 
-stages:
+services:
+  - docker:dind
 
+stages:
   - test_docker_compose
 
 test_docker_compose:
@@ -9,3 +11,5 @@ test_docker_compose:
   script: bash setup.sh
   only:
     - master
+  tags:
+    - docker
