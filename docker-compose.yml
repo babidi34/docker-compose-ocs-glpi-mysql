@@ -30,6 +30,7 @@ services:
       - ./ssl/ssl.crt:/etc/ssl/glpi.crt
       - ./front/vhost_glpi.conf:/etc/nginx/sites-available/glpi.conf
       - ./scripts/glpi-setup.sh:/usr/local/bin/glpi-setup.sh
+      - glpidata:/var/www/html/glpi/
     networks:
       glpi_project:
     depends_on:
@@ -50,6 +51,10 @@ services:
       - ./front/vhost_ocs.conf:/etc/nginx/sites-available/ocs.conf
       - ./scripts/ocs-setup.sh:/usr/local/bin/ocs-setup.sh
       - ./front/ocs_nginx.conf:/root/nginx.conf
+      - perlcomdata:/etc/ocsinventory-server
+      - extensionsdata:/usr/share/ocsinventory-reports/ocsreports/extensions
+      - varlibdata:/var/lib/ocsinventory-reports
+      - httpdconfdata:/etc/httpd/conf.d
     networks:
       glpi_project:
     depends_on:
@@ -62,3 +67,8 @@ networks:
 
 volumes:
   sqldata:
+  glpidata:
+  perlcomdata:
+  extensionsdata:
+  varlibdata:
+  httpdconfdata:
